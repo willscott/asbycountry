@@ -1,0 +1,34 @@
+{
+  "name": "asbycountry",
+  "version": "1.0.0",
+  "description": "Pre-built lookup table of ASes registered by country",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "node rebuild.js",
+    "postpublish": "rm asbycountry.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willscott/asbycountry.git"
+  },
+  "keywords": [
+    "asn",
+    "network",
+    "measurement",
+    "routing"
+  ],
+  "author": "Will Scott <willscott@gmail.com> (https://wills.co.tt)",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/willscott/asbycountry/issues"
+  },
+  "homepage": "https://github.com/willscott/asbycountry#readme",
+  "devDependencies": {
+    "chalk": "^1.1.3",
+    "event-stream": "^3.3.3",
+    "ftp-stream": "0.0.4",
+    "request": "^2.73.0",
+    "stream-reduce": "^1.0.3"
+  }
+}

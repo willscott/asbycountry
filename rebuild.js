@@ -8,11 +8,11 @@ var parseurl = require("url").parse;
 
 // entities from http://www.irr.net/docs/list.html
 var delegations = [
-  "ftp://ftp.ripe.net/ripe/stats/delegated-ripencc-latest", //ripe
-  "http://ftp.afrinic.net/pub/stats/afrinic/delegated-afrinic-latest", //afrinic
-  "ftp://ftp.apnic.net/public/apnic/stats/apnic/delegated-apnic-latest", //apnic
+  "ftp://ftp.ripe.net/ripe/stats/delegated-ripencc-extended-latest", //ripe
+  "http://ftp.afrinic.net/pub/stats/afrinic/delegated-afrinic-extended-latest", //afrinic
+  "ftp://ftp.apnic.net/public/apnic/stats/apnic/delegated-apnic-extended-latest", //apnic
   "ftp://ftp.arin.net/pub/stats/arin/delegated-arin-extended-latest", //arin
-  "ftp://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-latest" // lacnic
+  "ftp://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-extended-latest" // lacnic
 ];
 
 var getAndParseFile = function (url, callback) {
@@ -41,7 +41,9 @@ var parseFile = function (url, stream, callback) {
         return data.split("|");
       }))
       .pipe(reduce(function(map, line) {
-        if (line[2] === "asn") {
+        if (line[2] === "asn" &&
+            line[1] !== "*" &&
+            line[1].length) {
           if (!map[line[1]]) {
             map[line[1]] = [];
           }

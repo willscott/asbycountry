@@ -54,7 +54,7 @@ var parseFile = function (url, stream, callback) {
       .on("data", function(map) {
         var domain = parseurl(url).host;
         var asncount = Object.keys(map).map(function(country) {
-          return map[country].length
+          return map[country].length;
         }).reduce(function (a, b) {
           return a + b;
         }, 0);
@@ -75,6 +75,12 @@ if (fs.existsSync("asbycountry.json")) {
   process.exit(0);
 }
 
+// Allow programatic re-building
+var onCompletion = function () {};
+module.exports = function (onDone) {
+  onCompletion = onDone;
+};
+
 es.readArray(delegations)
     .pipe(es.map(getAndParseFile))
     .pipe(reduce(function(combined, map) {
@@ -90,6 +96,7 @@ es.readArray(delegations)
       console.log(chalk.green("Writing to asbycountry.json.."));
       fs.writeFileSync("asbycountry.json", JSON.stringify(map));
       console.log(chalk.green("Done."));
+      onCompletion(map);
     })
     .on("error", function(err) {
       console.error(chalk.red(err));

@@ -5,6 +5,7 @@ var ftpstream = require("ftp-stream");
 var request = require("request");
 var reduce = require("stream-reduce");
 var parseurl = require("url").parse;
+var path = require("path");
 
 // entities from http://www.irr.net/docs/list.html
 var delegations = [
@@ -14,6 +15,7 @@ var delegations = [
   "ftp://ftp.arin.net/pub/stats/arin/delegated-arin-extended-latest", //arin
   "ftp://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-extended-latest" // lacnic
 ];
+var output = path.resolve(__dirname, 'asbycountry.json');
 
 var getAndParseFile = function (url, callback) {
   var parts = parseurl(url);
@@ -70,7 +72,7 @@ var parseFile = function (url, stream, callback) {
       });
 };
 
-if (fs.existsSync("./asbycountry.json")) {
+if (fs.existsSync(builtfile)) {
   console.log(chalk.red("Cowardly refusing to overwrite existing asbycountry.json."));
   process.exit(0);
 }
@@ -94,7 +96,7 @@ es.readArray(delegations)
     }, {}))
     .on("data", function(map) {
       console.log(chalk.green("Writing to asbycountry.json.."));
-      fs.writeFileSync("./asbycountry.json", JSON.stringify(map));
+      fs.writeFileSync(builtfile, JSON.stringify(map));
       console.log(chalk.green("Done."));
       onCompletion(map);
     })

@@ -70,7 +70,7 @@ var parseFile = function (url, stream, callback) {
       });
 };
 
-if (fs.existsSync("asbycountry.json")) {
+if (fs.existsSync("./asbycountry.json")) {
   console.log(chalk.red("Cowardly refusing to overwrite existing asbycountry.json."));
   process.exit(0);
 }
@@ -94,7 +94,7 @@ es.readArray(delegations)
     }, {}))
     .on("data", function(map) {
       console.log(chalk.green("Writing to asbycountry.json.."));
-      fs.writeFileSync("asbycountry.json", JSON.stringify(map));
+      fs.writeFileSync("./asbycountry.json", JSON.stringify(map));
       console.log(chalk.green("Done."));
       onCompletion(map);
     })

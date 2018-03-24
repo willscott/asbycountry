@@ -1,11 +1,11 @@
 {
   "name": "asbycountry",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Pre-built lookup table of ASes registered by country",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "node rebuild.js",
+    "prepublishOnly": "node rebuild.js",
     "postpublish": "rm asbycountry.json"
   },
   "repository": {

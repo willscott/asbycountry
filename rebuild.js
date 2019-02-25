@@ -102,4 +102,5 @@ es.readArray(delegations)
     })
     .on("error", function(err) {
       console.error(chalk.red(err));
+      process.exit(1);
     });

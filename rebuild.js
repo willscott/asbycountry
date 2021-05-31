@@ -2,7 +2,8 @@ var chalk = require("chalk");
 var es = require("event-stream");
 var fs = require("fs");
 var ftpstream = require("ftp-stream");
-var request = require("request");
+var fetch = require("fetch");
+var FetchStream = fetch.FetchStream;
 var reduce = require("stream-reduce");
 var parseurl = require("url").parse;
 var path = require("path");
@@ -28,7 +29,8 @@ var getAndParseFile = function (url, callback) {
       console.error(chalk.red(err));
     });
   } else {
-    parseFile(url, request(url), callback);
+    let fetchinst = new FetchStream(url)
+    parseFile(url, fetchinst, callback);
   }
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "asbycountry",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Pre-built lookup table of ASes registered by country",
   "main": "index.js",
   "scripts": {

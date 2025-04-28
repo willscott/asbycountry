@@ -12,8 +12,8 @@ var path = require("path");
 var delegations = [
   "ftp://ftp.ripe.net/ripe/stats/delegated-ripencc-extended-latest", //ripe
   "http://ftp.afrinic.net/pub/stats/afrinic/delegated-afrinic-extended-latest", //afrinic
-  "ftp://ftp.apnic.net/public/apnic/stats/apnic/delegated-apnic-extended-latest", //apnic
-  "ftp://ftp.arin.net/pub/stats/arin/delegated-arin-extended-latest", //arin
+  "https://ftp.apnic.net/public/apnic/stats/apnic/delegated-apnic-extended-latest", //apnic
+  "https://ftp.arin.net/pub/stats/arin/delegated-arin-extended-latest", //arin
   "ftp://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-extended-latest" // lacnic
 ];
 var builtfile = path.resolve(__dirname, 'asbycountry.json');
@@ -26,7 +26,7 @@ var getAndParseFile = function (url, callback) {
     }, parts.path.substr(1)).on("data", function (file) {
       parseFile(url, file, callback);
     }).on("error", function(err) {
-      console.error(chalk.red(err));
+      console.error(chalk.red(err) + url);
     });
   } else {
     let fetchinst = new FetchStream(url)
